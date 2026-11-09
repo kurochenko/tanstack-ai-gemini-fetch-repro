@@ -23,14 +23,18 @@ const adapter = createGeminiChat('gemini-2.5-flash', 'fake-key', {
   httpOptions: { fetch: myFetch },
 })
 
-let text = ''
-let error
-for await (const chunk of chat({
-  threadId: 'repro',
-  adapter,
-  messages: [{ role: 'user', content: 'Hi' }],
-})) {
-  if (chunk.type === 'TEXT_MESSAGE_CONTENT') text += chunk.delta
-  if (chunk.type === 'RUN_ERROR') error = chunk.message
+async function main() {
+  let text = ''
+  let error
+  for await (const chunk of chat({
+    threadId: 'repro',
+    adapter,
+    messages: [{ role: 'user', content: 'Hi' }],
+  })) {
+    if (chunk.type === 'TEXT_MESSAGE_CONTENT') text += chunk.delta
+    if (chunk.type === 'RUN_ERROR') error = chunk.message
+  }
+  console.log(JSON.stringify({ text, customFetchCalls, error }))
 }
-console.log(JSON.stringify({ text, customFetchCalls, error }))
+
+main()
