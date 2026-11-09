@@ -1,0 +1,13 @@
+{
+  "name": "tanstack-ai-gemini-custom-fetch-repro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node repro.mjs"
+  },
+  "dependencies": {
+    "@tanstack/ai": "1.2.0",
+    "@tanstack/ai-gemini": "1.2.0",
+    "zod": "^4.3.6"
+  }
+}
